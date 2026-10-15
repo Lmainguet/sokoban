@@ -15,40 +15,38 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.codingame.gameengine</groupId>
-            <artifactId>core</artifactId>
-            <version>${gamengine.version}</version>
-        </dependency>
+      <dependency>
+          <groupId>com.codingame.gameengine</groupId>
+          <artifactId>core</artifactId>
+          <version>${gamengine.version}</version>
+      </dependency>
 
-        <dependency>   
-            <groupId>com.codingame.gameengine</groupId>
-            <artifactId>module-entities</artifactId>
-            <version>${gamengine.version}</version>
-        </dependency>
+      <dependency>   
+          <groupId>com.codingame.gameengine</groupId>
+          <artifactId>module-entities</artifactId>
+          <version>${gamengine.version}</version>
+      </dependency>
 
-        <dependency>
-            <groupId>com.codingame.gameengine</groupId>
-            <artifactId>runner</artifactId>
-            <version>${gamengine.version}</version>
-        </dependency>
+      <dependency>
+          <groupId>com.codingame.gameengine</groupId>
+          <artifactId>runner</artifactId>
+          <version>${gamengine.version}</version>
+      </dependency>
 
-        <dependency>
-            <groupId>com.codingame.gameengine</groupId>
-            <artifactId>module-tooltip</artifactId>
-            <version>${gamengine.version}</version>
-        </dependency>
+      <dependency>
+          <groupId>com.codingame.gameengine</groupId>
+          <artifactId>module-tooltip</artifactId>
+          <version>${gamengine.version}</version>
+      </dependency>
 
-        <dependency>
-          <groupId>fr.uga</groupId>
-          <artifactId>pddl4j</artifactId>
-          <version>4.0.0</version>
-        </dependency>
-
+      <dependency>
+        <groupId>fr.uga</groupId>
+        <artifactId>pddl4j</artifactId>
+        <version>4.0.0</version>
+      </dependency>
     </dependencies>
 
-    <build>
-      
+    <build> 
       <plugins>
           <!-- any other plugins -->
           <plugin>
