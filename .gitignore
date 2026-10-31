@@ -1,6 +1,7 @@
 /bin/
 /target/
-/.project
-/.classpath
-/.idea/
+/.*/
 /.vscode/
+/node_modules/
+/org.eclipse.jdt.core.prefs
+/org.eclipse.m2e.core.prefs

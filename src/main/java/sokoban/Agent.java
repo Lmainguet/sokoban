@@ -1,47 +1,70 @@
 package sokoban;
 
+import fr.uga.pddl4j.planners.ProblemNotSupportedException;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
+
 public class Agent {
-    //private static final String PROBLEM_FILE = "sokoban_pddl/sokoban_problem.pddl";
 
-    public static void main(String[] args) {
-        //Scanner input = new Scanner(System.in);
-        //convertCurrentLevelToPDDLProblem(input);
-        String solution = "DUU";
-        for (char c : solution.toCharArray()) System.out.println(c);
-    }
+    public static void main(String[] args) throws IOException, ProblemNotSupportedException {
+        Scanner input = new Scanner(System.in);
+        if (!input.hasNextInt()) {
+            return;
+        }
 
-
-    /*public static void convertCurrentLevelToPDDLProblem(Scanner input) {
-
-        // First line: dimensions and number of boxes
         int width = input.nextInt();
         int height = input.nextInt();
         int boxCount = input.nextInt();
-        input.nextLine(); // Consume the remaining newline
-        System.err.printf("[INPUT] width=%d height=%d boxes=%d%n", width, height, boxCount);
+        input.nextLine();
 
-        // Complete static map: '#' = wall, '*' = goal, '.' = floor
-        char[][] map = new char[height][];
+        char[][] map = new char[height][width];
         for (int y = 0; y < height; y++) {
-        map[y] = input.nextLine().toCharArray();
-        System.err.printf("[INPUT] row %02d |%s|%n", y, new String(map[y]));
+            String row = input.nextLine();
+            if (row.length() != width) {
+                throw new IllegalArgumentException("Expected map row of width " + width + ", got " + row.length());
+            }
+            map[y] = row.toCharArray();
+        }
+
+        int playerX = input.nextInt();
+        int playerY = input.nextInt();
+        int[][] boxes = new int[boxCount][2];
+        for (int i = 0; i < boxCount; i++) {
+            boxes[i][0] = input.nextInt();
+            boxes[i][1] = input.nextInt();
+        }
+        input.nextLine();
+
+        List<String> plan = ProblemBuilder.solve(
+                                                width,
+                                                height,
+                                                map,
+                                                playerX,
+                                                playerY,
+                                                boxes
+                                            );
+        int nextAction = 0;
+        while (true) {
+            if (nextAction >= plan.size()) {
+                throw new IllegalStateException("The planner's action sequence ended before the game was solved");
+            }
+            System.out.println(plan.get(nextAction++));
+            System.out.flush();
+
+            if (!input.hasNextInt()) {
+                return;
+            }
+            input.nextInt();
+            input.nextInt();
+            for (int i = 0; i < boxCount; i++) {
+                input.nextInt();
+                input.nextInt();
+            }
+            input.nextLine();
+        }
     }
-
-    // Initial player position
-    int playerX = input.nextInt();
-    int playerY = input.nextInt();
-    System.err.printf("[INPUT] player x=%d y=%d%n", playerX, playerY);
-
-    // Initial box positions
-    int[][] boxes = new int[boxCount][2];
-    for (int i = 0; i < boxCount; i++) {
-       boxes[i][0] = input.nextInt(); // x
-       boxes[i][1] = input.nextInt(); // y
-       System.err.printf("[INPUT] box %d x=%d y=%d%n", i, boxes[i][0], boxes[i][1]);
-    }
-
-    createPDDLProblemFile(PROBLEM_FILE, width, height, boxCount, map, playerX, playerY, boxes);
-    return;}*/
+    
 }

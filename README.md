@@ -1,12 +1,19 @@
 Play the game on [CodinGame](https://www.codingame.com/training/hard/sokoban)
 
+## Installation
 Maven is needed.
 
 Install pddl4j (https://github.com/pellierd/pddl4j) in your local maven repo:
 ```
-mvn install:install-file -Dfile=../../lib/pddl4j-4.0.0.jar -DgroupId=fr.uga -DartifactId=pddl4j -Dversion=4.0.0 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file \
+   -Dfile=<path-to-file-pddl4j-4.0.0.jar> \
+   -DgroupId=fr.uga \
+   -DartifactId=pddl4j \
+   -Dversion=4.0.0 \
+   -Dpackaging=jar \
+   -DgeneratePom=true
  ```  
-Work with maven: mvn clean, mvn compile, mvn test, mvn package
+Work with maven: mvn clean && mvn compile && mvn test && mvn package
 
 Run with: 
 ````
@@ -24,8 +31,24 @@ java --add-opens java.base/java.lang=ALL-UNNAMED \
 ```
 Sorry ```mvn exec:java``` has still an open issue ("Directory src/main/resources/view/assets not found.")
 
-See planning solutions at http://localhost:8888/test.html
 
-```
-java -cp ../../lib/pddl4j-4.0.0.jar fr.uga.pddl4j.planners.statespace.HSP src/main/java/sokoban/pddl/domain.pddl src/main/java/sokoban/pddl/pd01.pddl
-```
+# Changement 
+Ce qui a changé : 
+domain.pddl
+Agent.java
+ProblemBuilder.java
+SokobanMain.java (pour choisir le niveau)
+pom.xml
+
+## Execution du code
+Se placer dans le dossier contenant le projet
+Lancer les commandes 
+mvn clean && mvn compile && mvn test && mvn package
+Puis
+java --add-opens java.base/java.lang=ALL-UNNAMED \
+      -server -Xms2048m -Xmx2048m \
+      -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q):target/test-classes/:target/classes" \
+      sokoban.SokobanMain
+
+# Observation
+See planning solutions at http://localhost:8888/test.html
